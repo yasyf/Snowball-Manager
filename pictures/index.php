@@ -50,17 +50,21 @@ if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['photo']) && 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Snowball Pictures Order From</title>
+<?php if(!$_REQUEST['print']){ ?>
 <link href="http://cache.yasyf.com/style.css" rel="stylesheet" type="text/css" media="screen" />
+<?php } ?>
 </head>
 <body>
 <center>
+<?php if(!$_REQUEST['print']){ ?>
 <h2>Snowball Picture Order Form</h2>
 <h3 style="color:red">Please Use A Separate Entry For Each Photo You Wish To Order</h3>
 <h3 style="color:red">Need To Change Your Order? Check Your Email</h3>
+<h3 style="color:red">Snowball Photo Orders Are No Longer Being Taken</h3>
 <b>Prices:</b> <span style="color:blue">4x6</span> (<span style="color:green">$2</span>) | <span style="color:blue">5x7</span> (<span style="color:green">$3</span>) | <span style="color:blue">8x10</span> (<span style="color:green">$5</span>)
 <br /><br />
 <?php
-if(!$_REQUEST['admin']){
+if($_REQUEST['order']){
 	?>
 <form action="" method="POST" style="border-style:solid;border-width:2px;">
 Name: <input type="text" name="name" value="<?php if(isset($_REQUEST['name'])) echo $_REQUEST['name'];?>"/> <br />
@@ -92,6 +96,7 @@ if(isset($_GET['confirm'])){
 </form>
 <br /><br />
 <?php 
+}
 }
 ?>
 <h3>All Current Orders:</h3>
@@ -163,8 +168,9 @@ while($row = mysql_fetch_array($result)){
 		<?php
 	}
 	?>
-	
+	<?php if(!$_REQUEST['print']){ ?>
 	<p><b>Need help? <a href="mailto:yasyf@yasyf.com?subject=Snowball Photos Help" style="color:green;text-decoration:none;">Email Yasyf</a>.</b></p>
+	<?php } ?>
 	</center>	
 </body>
 </html>
